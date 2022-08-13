@@ -1,4 +1,5 @@
 import { mongoose } from "mongoose";
+import bcrypt from 'bcryptjs'
 
 const userValidation = new mongoose.Schema({
     firstName: {
@@ -40,6 +41,13 @@ const userValidation = new mongoose.Schema({
     }
 });
 
+
+userValidation.pre('save', function (next) {
+    var salt = bcrypt.genSaltSync(10);
+    this.password = bcrypt.hashSync(this.password, salt);
+    console.log(this.password);
+    next();
+})
 const User = mongoose.model('user', userValidation)
 
 export default User;
