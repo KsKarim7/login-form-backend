@@ -4,7 +4,12 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import ConnectDB from './database/db.js';
-import Router from './route.js'
+// const Router = express.Router();
+
+import Router from './controller.js'
+
+// mongodb user otp verification
+import UserOTPVerification from './userOTPVerification.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +21,8 @@ app.use(cors());
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', Router);
+
+
 
 
 

@@ -1,6 +1,8 @@
 import User from "./validation.js";
+import express from 'express';
+const router = express.Router();
 
-export const userSignup = async (req, res) => {
+router.post('/signup', async (req, res) => {
     try {
 
         const exists = await User.findOne({ userName: req.body.userName })
@@ -18,9 +20,12 @@ export const userSignup = async (req, res) => {
     catch (error) {
         res.status(500).json({ message: error.message })
     }
-}
 
-export const userLogin = async (req, res) => {
+})
+// export const userSignup = async (req, res) => {
+// }
+
+router.post('/login', async (req, res) => {
     try {
         const userName = req.body.userName;
         const password = req.body.password;
@@ -36,4 +41,7 @@ export const userLogin = async (req, res) => {
     catch (error) {
         res.status(500).json('Error', error.message)
     }
-}
+})
+// export const userLogin = async (req, res) => {
+// }
+export default router;
